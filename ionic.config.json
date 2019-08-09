@@ -1,0 +1,7 @@
+{
+  "name": "pantau",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
