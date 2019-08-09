@@ -3,77 +3,101 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Pantau Lingkungan
+    <ion-title style="margin-left: auto;">
+      PANTAU LINGKUNGAN
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- 1 Pantau Sampah -->
-    <ion-card class="welcome-card" color="success" routerLink="/pantau-sampah" routerDirection="forward">
-        <img src="/assets/home/images/1.jpeg" alt="" style="height:100px; border-radius: 50%; 
-          margin-left: auto;
-          margin-right: auto;
-          margin-top: 5px;
-          width: 30%;"/>     
-          <ion-card-header>
-        <ion-card-title text-center><b>Pantau Sampah</b></ion-card-title>
-      </ion-card-header>
-    </ion-card>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+             <!-- 1 Pantau Sampah -->
+            <ion-card class="welcome-card" color="success" routerLink="/pantau-sampah" routerDirection="forward">
+              <img src="/assets/home/images/1.jpeg" alt="" style="height:50px; border-radius: 50%; 
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+                width: 30%;"/>     
+                <ion-card-header>
+              <ion-card-title text-center style="font-size: 15px;"><b>Pantau Sampah</b></ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          </ion-col>
+          <ion-col>
+            <!-- 2 Pantau Sungai -->
+          <ion-card class="welcome-card" color="success" routerLink="/pantau-sungai" routerDirection="forward">
+            <div><img src="/assets/home/images/2.jpeg" alt="" style="height:50px; border-radius: 50%; 
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 10px;
+              width: 30%;"/></div>     
+              <ion-card-header>
+            <ion-card-title text-center style="font-size: 15px;"><b>Pantau Sungai</b></ion-card-title>
+          </ion-card-header>
+        </ion-card>
+          </ion-col>
+        </ion-row>
 
-    <!-- 2 Pantau Sungai -->
-
-    <ion-card class="welcome-card" color="success" routerLink="/pantau-sungai" routerDirection="forward">
-        <div><img src="/assets/home/images/2.jpeg" alt="" style="height:100px; border-radius: 50%; 
-          margin-left: auto;
-          margin-right: auto;
-          margin-top: 5px;
-          width: 30%;"/></div>     
-           <ion-card-header>
-        <ion-card-title text-center><b>Pantau Sungai</b></ion-card-title>
-      </ion-card-header>
-    </ion-card>
-   
-
-     <!-- 3 Pantau Hutan -->
+        <ion-row>
+          <ion-col>
+             <!-- 3 Pantau Hutan -->
+        <ion-card class="welcome-card" color="success">
+            <div><img src="/assets/home/images/3.jpeg" alt="" style="height:50px; border-radius: 50%; 
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 10px;
+              width: 30%;"/></div>       
+              <ion-card-header>
+              <ion-card-title text-center style="font-size: 15px;"><b>Pantau Hutan</b></ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          </ion-col>
+          <ion-col>
+      <!--4 Pantau Investasi-->
 
      <ion-card class="welcome-card" color="success">
-        <div><img src="/assets/home/images/3.jpeg" alt="" style="height:100px; border-radius: 50%; 
+        <img src="/assets/home/images/4.jpeg" alt="" style="height:50px; border-radius: 50%; 
           margin-left: auto;
           margin-right: auto;
-          margin-top: 5px;
-          width: 30%;"/></div>       
-           <ion-card-header>
-          <ion-card-title text-center><b>Pantau Hutan</b></ion-card-title>
-        </ion-card-header>
-      </ion-card>
-
-       <!--4 Pantau Investasi-->
-
-     <ion-card class="welcome-card" color="success">
-        <div><img src="/assets/home/images/4.jpeg" alt="" style="height:100px; border-radius: 50%; 
-          margin-left: auto;
-          margin-right: auto;
-          margin-top: 5px;
-          width: 30%;"/></div>     
+          margin-top: 10px;
+          width: 30%;"/>   
              <ion-card-header>
-          <ion-card-title text-center><b>Pantau Investasi</b></ion-card-title>
+          <ion-card-title text-center style="font-size: 15px;"><b>Investasi</b></ion-card-title>
         </ion-card-header>
       </ion-card>
-
-      <!-- 5 Pantau Sampah Plastik-->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <!-- 5 Pantau Sampah Plastik-->
 
      <ion-card class="welcome-card" color="success">
-        <div><img src="/assets/home/images/5.jpeg" alt="" style="height:100px; border-radius: 50%; 
+        <div><img src="/assets/home/images/5.jpeg" alt="" style="height:50px; border-radius: 50%; 
           margin-left: auto;
           margin-right: auto;
-          margin-top: 5px;
+          margin-top: 10px;
           width: 30%;"/></div>
         <ion-card-header>
-          <ion-card-title text-center><b>Pantau Sampah Plastik</b></ion-card-title>
+          <ion-card-title text-center style="font-size: 15px;"><b>Sampah Plastik</b></ion-card-title>
         </ion-card-header>
       </ion-card>
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+        </ion-row>
+</ion-grid>      
+ 
+
+    
+   
+
+   
+
+    
+      
    <!--  <ion-list lines="none">
       <ion-list-header>
         <ion-label>Resources</ion-label>
