@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   { path: 'pantau-sampah', loadChildren: './pantau-sampah/pantau-sampah.module#PantauSampahPageModule' },
   { path: 'pantau-sungai', loadChildren: './pantau-sungai/pantau-sungai.module#PantauSungaiPageModule' },
-  { path: 'pantau-hutan', loadChildren: './pantau-hutan/pantau-hutan.module#PantauHutanPageModule' }
+  { path: 'pantau-hutan', loadChildren: './pantau-hutan/pantau-hutan.module#PantauHutanPageModule' },
+  { path: 'pantau-investasi', loadChildren: './pantau-investasi/pantau-investasi.module#PantauInvestasiPageModule' }
 ];
 
 @NgModule({
