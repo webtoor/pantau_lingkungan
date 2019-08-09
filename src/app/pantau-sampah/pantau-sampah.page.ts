@@ -127,6 +127,7 @@ export class PantauSampahPage implements OnInit {
       console.log(resp)
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
+      this.accuracy = resp.coords.accuracy;
       var altitudes = resp.coords.altitude;
       if(!altitudes){
         this.altitude = 'Data tidak tersedia';
