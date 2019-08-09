@@ -1,0 +1,14 @@
+<ion-content padding>
+    <ion-item style="margin-top:20px">
+      <ion-input type="text" name="email" placeholder="Email" [(ngModel)]="SignIn.email"></ion-input>
+    </ion-item>
+  <ion-item style="margin-top:20px">
+    <ion-input type="password" placeholder="Password" [(ngModel)]="SignIn.password"></ion-input>
+  </ion-item>
+  <div text-center style="margin-top:30px">
+    <ion-button expand="block" color="tertiary" (click)="submit()">Sign In</ion-button>
+  </div>
+  <ion-toolbar style="margin-top:40px;" color="white" text-center>
+      <div style="font-size: 16px; font-weight: bold;" ><a (click)="register()" color="primary" >Sign Up</a></div>
+  </ion-toolbar>
+</ion-content>

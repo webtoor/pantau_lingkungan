@@ -50,6 +50,7 @@ export class PantauSampahPage implements OnInit {
     requestGPSPermission() {
       this.locationAccuracy.canRequest().then((canRequest: boolean) => {
         if (canRequest) {
+          this.askToTurnOnGPS();
           console.log("4");
         } else {
           //Show 'GPS Permission Request' dialogue
@@ -61,7 +62,8 @@ export class PantauSampahPage implements OnInit {
               },
               error => {
                 //Show alert if user click on 'No Thanks'
-                alert('requestPermission Error requesting location permissions ' + error)
+                /* alert('requestPermission Error requesting location permissions ' + error) */
+                alert('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
               }
             );
         }
@@ -69,12 +71,15 @@ export class PantauSampahPage implements OnInit {
     }
    
     askToTurnOnGPS() {
+      
       this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
         () => {
           // When GPS Turned ON call method to get Accurate location coordinates
           this.getLocationCoordinates()
         },
-        error => alert('Error requesting location permissions ' + JSON.stringify(error))
+        error => 
+        /* alert('Error requesting location permissions ' + JSON.stringify(error)) */
+        alert('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
       );
     }
   async submit() {
