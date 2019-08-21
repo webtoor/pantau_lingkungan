@@ -9,19 +9,15 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
-  {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  },
-  { path: 'pantau-sampah', loadChildren: './pantau-sampah/pantau-sampah.module#PantauSampahPageModule' },
-  { path: 'pantau-sungai', loadChildren: './pantau-sungai/pantau-sungai.module#PantauSungaiPageModule' },
-  { path: 'pantau-hutan', loadChildren: './pantau-hutan/pantau-hutan.module#PantauHutanPageModule' },
-  { path: 'pantau-investasi', loadChildren: './pantau-investasi/pantau-investasi.module#PantauInvestasiPageModule' },
-  { path: 'pantau-sampah-plastik', loadChildren: './pantau-sampah-plastik/pantau-sampah-plastik.module#PantauSampahPlastikPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
+  { path: 'pantau-sampah', loadChildren: './pages/pantau-sampah/pantau-sampah.module#PantauSampahPageModule' },
+  { path: 'pantau-sungai', loadChildren: './pages/pantau-sungai/pantau-sungai.module#PantauSungaiPageModule' },
+  { path: 'pantau-hutan', loadChildren: './pages/pantau-hutan/pantau-hutan.module#PantauHutanPageModule' },
+  { path: 'pantau-investasi', loadChildren: './pages/pantau-investasi/pantau-investasi.module#PantauInvestasiPageModule' },
+  { path: 'pantau-sampah-plastik', loadChildren: './pages/pantau-sampah-plastik/pantau-sampah-plastik.module#PantauSampahPlastikPageModule' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' }
 ];
 
 @NgModule({
