@@ -9,16 +9,15 @@ let apiUrl = "http://127.0.0.1:8000/";
   providedIn: 'root'
 })
 export class AuthService {
-  data_provider:any;
   constructor(public http:HttpClient) {
 
    }
-   register(data, type){
+   
+   Register(data, type){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Accept' : 'application/json',
-        'Access-Control-Allow-Origin' :  '*',
       })
     };
     return this.http.post<any>(apiUrl+type, data, httpOptions)
