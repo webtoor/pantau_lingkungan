@@ -27,4 +27,17 @@ export class AuthService {
       
     );
   }
+
+  Login(data, type): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept' : 'application/json',
+      })
+    };
+    return this.http.post<any>(apiUrl+type, data, httpOptions)
+      .pipe(
+    
+      );
+  }
 }
