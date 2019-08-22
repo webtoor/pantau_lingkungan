@@ -1,13 +1,23 @@
 <ion-content padding>
-    <ion-item style="margin-top:20px">
-      <ion-input type="text" name="email" placeholder="Email" [(ngModel)]="SignIn.email"></ion-input>
+    <form [formGroup]="loginForm"  (ngSubmit)="onFormSubmit(loginForm.value)">
+
+    <ion-item class="marginTop">
+      <ion-input type="text" name="email" placeholder="Email" formControlName="email"></ion-input>
     </ion-item>
-  <ion-item style="margin-top:20px">
-    <ion-input type="password" placeholder="Password" [(ngModel)]="SignIn.password"></ion-input>
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email harus diisi!</div>
+        <div *ngIf="f.email.errors.email">Format email harus valid!</div>
+    </div>
+  <ion-item class="marginTop">
+    <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
   </ion-item>
-  <div text-center style="margin-top:30px">
-    <ion-button expand="block" color="tertiary" (click)="submit()">Sign In</ion-button>
+  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password harus diisi!</div>
   </div>
+  <div text-center style="margin-top:30px">
+    <ion-button expand="block" color="tertiary" type="submit">Sign In</ion-button>
+  </div>
+  </form>
   <ion-toolbar style="margin-top:40px;" color="white" text-center>
       <div style="font-size: 16px; font-weight: bold;" ><a (click)="register()" color="primary" >Sign Up</a></div>
   </ion-toolbar>
