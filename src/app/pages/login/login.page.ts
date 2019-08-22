@@ -26,9 +26,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+
   }
+
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    if(localStorage.getItem('userAuth') ){
+      this.router.navigate(['/home', {replaceUrl: true}]);
+    }
   }
 
   onFormSubmit() {
