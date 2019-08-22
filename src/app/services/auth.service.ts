@@ -12,7 +12,9 @@ export class AuthService {
   constructor(public http:HttpClient) {
 
    }
-   
+   isAuthenticated(){
+    return localStorage.getItem('userAuth');
+  }
    Register(data, type){
     const httpOptions = {
       headers: new HttpHeaders({
