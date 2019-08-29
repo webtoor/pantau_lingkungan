@@ -1,22 +1,32 @@
 <ion-content padding>
    <form [formGroup]="registerForm"  (ngSubmit)="onFormSubmit(registerForm.value)">
     <ion-item class="marginTop">
-      <ion-input type="text" formControlName="firstname" placeholder="Nama Depan"></ion-input>
+      <ion-input type="text" formControlName="namaDepan" placeholder="Nama Depan"></ion-input>
     </ion-item>
-    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-        <div *ngIf="f.firstname.errors.required">Nama Depan harus diisi!</div>
+    <div *ngIf="submitted && f.namaDepan.errors" class="invalid-feedback">
+        <div *ngIf="f.namaDepan.errors.required">Nama Depan harus diisi!</div>
     </div>
     <ion-item class="marginTop">
-      <ion-input type="text" formControlName="lastname" placeholder="Nama Belakang"></ion-input>
+      <ion-input type="text" formControlName="namaBelakang" placeholder="Nama Belakang"></ion-input>
     </ion-item>
-    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-        <div *ngIf="f.lastname.errors.required">Nama Belakang harus diisi!</div>
+    <div *ngIf="submitted && f.namaBelakang.errors" class="invalid-feedback">
+        <div *ngIf="f.namaBelakang.errors.required">Nama Belakang harus diisi!</div>
     </div>
     <ion-item class="marginTop">
-        <ion-input type="number" formControlName="phone_number" placeholder="No Hp"></ion-input>
+        <ion-input type="number" formControlName="noHp" placeholder="No Hp"></ion-input>
     </ion-item>
-    <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
-        <div *ngIf="f.phone_number.errors.required">No Hp harus diisi!</div>
+    <div *ngIf="submitted && f.noHp.errors" class="invalid-feedback">
+        <div *ngIf="f.noHp.errors.required">No Hp harus diisi!</div>
+    </div>
+    <ion-item class="marginTop">
+      <ion-label>Jenis Kelamin</ion-label>
+      <ion-select placeholder="Jenis Kelamin" formControlName="jenisKelamin">
+        <ion-select-option value="0">Perempuan</ion-select-option>
+        <ion-select-option value="1">Laki-laki</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="submitted && f.jenisKelamin.errors" class="invalid-feedback">
+      <div *ngIf="f.jenisKelamin.errors.required">Harus memilih jenis kelamin!</div>
     </div>
     <ion-item class="marginTop">
       <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>

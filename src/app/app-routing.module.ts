@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    canActivate : [AuthGuardService]
   },
   { path: 'pantau-sampah', loadChildren: './pages/pantau-sampah/pantau-sampah.module#PantauSampahPageModule', canActivate : [AuthGuardService] },
   { path: 'pantau-sungai', loadChildren: './pages/pantau-sungai/pantau-sungai.module#PantauSungaiPageModule', canActivate : [AuthGuardService] },

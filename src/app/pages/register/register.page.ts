@@ -19,11 +19,12 @@ export class RegisterPage implements OnInit {
     public toastController: ToastController,
     public authService: AuthService,  ) {
     this.registerForm = this.formBuilder.group({
-      'firstname' : [null, Validators.required],
-      'lastname' : [null, Validators.required],
-      'phone_number' : [null, Validators.required],
-      'alamat' : [null, Validators.required],
+      'namaDepan' : [null, Validators.required],
+      'namaBelakang' : [null, Validators.required],
       'email' : [null, [Validators.required, Validators.email]],
+      'noHp' : [null, Validators.required],
+      'jenisKelamin' : [null, Validators.required],
+      'alamat' : [null, Validators.required],
       'password' : [null, Validators.required],
     });
    }
