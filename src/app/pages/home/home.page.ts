@@ -52,6 +52,7 @@ export class HomePage {
   }
   ionViewWillEnter() {
    console.log('rate')
+
   }
   async presentToast(msg) {
     const toast = await this.toastController.create({
@@ -158,7 +159,8 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-             this.router.navigate(['/home', {replaceUrl: true}]); 
+            this.router.navigate(['/loader', {replaceUrl: true}]);
+
           }
         }
       ]

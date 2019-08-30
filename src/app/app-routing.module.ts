@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'pantau-investasi', loadChildren: './pages/pantau-investasi/pantau-investasi.module#PantauInvestasiPageModule', canActivate : [AuthGuardService] },
   { path: 'pantau-sampah-plastik', loadChildren: './pages/pantau-sampah-plastik/pantau-sampah-plastik.module#PantauSampahPlastikPageModule', canActivate : [AuthGuardService] },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' }
+  { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
+  { path: 'loader', loadChildren: './pages/loader/loader.module#LoaderPageModule', canActivate : [AuthGuardService] }
 ];
 
 @NgModule({
