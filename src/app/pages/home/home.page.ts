@@ -21,6 +21,7 @@ export class HomePage {
   longitude
   accuracy
   altitude
+  userAuth
 
   constructor(
     public authService: AuthService,
@@ -32,20 +33,25 @@ export class HomePage {
     private locationAccuracy: LocationAccuracy,
     private formBuilder: FormBuilder, public router : Router, public menuCtrl: MenuController, ) {
     this.laporanForm = this.formBuilder.group({
-      'judul' : ['', Validators.required],
-      'kategori' : ['', Validators.required],
-      'namaPerusahaan' : [''],
-      'desaKelurahan' : [''],
-      'kecamatan' : [''],
-      'kotaKabupaten' : [''],
-      'provinsi' : [''],
-      'deskripsiLaporan' : ['', Validators.required],
+      'judul' : [null, Validators.required],
+      'kategori' : [null, Validators.required],
+      'namaPerusahaan' : [null],
+      'desaKelurahan' : [null],
+      'kecamatan' : [null],
+      'kotaKabupaten' : [null],
+      'provinsi' : [null],
+      'deskripsiLaporan' : [null, Validators.required],
     });
+    const data = JSON.parse(localStorage.getItem('userAuth'));
+    this.userAuth = data;
   }
 
 
   ngOnInit() {
     this.menuCtrl.enable(true);
+  }
+  ionViewWillEnter() {
+   console.log('rate')
   }
   async presentToast(msg) {
     const toast = await this.toastController.create({
@@ -152,8 +158,7 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-            this.router.navigate(['/home']);
-
+             this.router.navigate(['/home', {replaceUrl: true}]); 
           }
         }
       ]
@@ -184,12 +189,25 @@ export class HomePage {
 
   onFormSubmit() {
     this.submitted = true;
-
+    this.laporanForm.value['user_id'] = this.userAuth['id']
     if (this.laporanForm.invalid) {
       this.presentToast('Anda belum melengkapi formulir')
+      return
      }
+     console.log(this.laporanForm.value)
+      this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
+        console.log(res)
+        if(res.status == 401){
+          localStorage.clear();
+          this.presentToast('Akses Token Invalid')
+          this.router.navigate(['/login', {replaceUrl: true}]);
 
-     
+        }else{
+          this.submit();
+        }
+      }, (err) => {
+        console.log(err);
+      });
 
 
   }
