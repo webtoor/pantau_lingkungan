@@ -40,6 +40,10 @@ export class HomePage {
       'kecamatan' : [null],
       'kotaKabupaten' : [null],
       'provinsi' : [null],
+      'latitude' : [null, Validators.required],
+      'longitude' : [null, Validators.required],
+      'altitude' : [null, Validators.required],
+      'accuracy' : [null, Validators.required],
       'deskripsiLaporan' : [null, Validators.required],
     });
     const data = JSON.parse(localStorage.getItem('userAuth'));
@@ -135,6 +139,10 @@ export class HomePage {
         this.longitude = resp.coords.longitude;
         this.accuracy = resp.coords.accuracy;
         var altitudes = resp.coords.altitude;
+        this.laporanForm.value['latitude'] = resp.coords.latitude;
+        this.laporanForm.value['longitude'] = resp.coords.longitude;
+        this.laporanForm.value['altitude'] = resp.coords.altitude;
+        this.laporanForm.value['accuracy'] = resp.coords.accuracy;
         if(!altitudes){
           this.altitude = 'Data tidak tersedia';
         }else{
@@ -190,29 +198,48 @@ export class HomePage {
 
   get f() { return this.laporanForm.controls; }
 
-  onFormSubmit() {
+  async onFormSubmit() {
     this.submitted = true;
     this.laporanForm.value['user_id'] = this.userAuth['id']
+
     if (this.laporanForm.invalid) {
-      this.presentToast('Anda belum melengkapi formulir')
+      this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
      console.log(this.laporanForm.value)
-      this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
-        console.log(res)
-        if(res.status == 401){
-          localStorage.clear();
-          this.presentToast('Akses Token Invalid')
-          this.router.navigate(['/login', {replaceUrl: true}]);
-
-        }else{
-          this.submit();
+     const alert = await this.alertController.create({
+      header: 'Konfirmasi',
+      message: 'Anda yakin dengan isi data diatas?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            
+          }
+        },
+       {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
+              console.log(res)
+              if(res.status == 401){
+                localStorage.clear();
+                this.presentToast('Akses Token Invalid')
+                this.router.navigate(['/login', {replaceUrl: true}]);
+      
+              }else{
+                this.router.navigate(['/loader', {replaceUrl: true}]);
+              }
+            }, (err) => {
+              console.log(err);
+            });
+          }
         }
-      }, (err) => {
-        console.log(err);
-      });
-
-
+      ]
+    });
+    await alert.present();
+    
   }
 
 }

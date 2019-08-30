@@ -93,19 +93,19 @@
                   <br>
                   <mat-form-field class="full-width" style="margin-top:10px;">
                       <mat-label>Latitude</mat-label>
-                      <input matInput placeholder="Latitude" value="{{latitude}}" readonly>
+                      <input matInput placeholder="Latitude" value="{{latitude}}" formControlName="latitude" readonly>
                     </mat-form-field>
                     <mat-form-field class="full-width">
                         <mat-label>Longitude</mat-label>
-                        <input matInput placeholder="Longitude" value="{{longitude}}" readonly>
+                        <input matInput placeholder="Longitude" value="{{longitude}}" formControlName="longitude" readonly>
                       </mat-form-field>
                       <mat-form-field class="full-width">
                           <mat-label>Altitude</mat-label>
-                          <input matInput placeholder="Altitude" value="{{altitude}}" readonly>
+                          <input matInput placeholder="Altitude" value="{{altitude}}" formControlName="altitude" readonly>
                         </mat-form-field>
                         <mat-form-field class="full-width">
                             <mat-label>Accuracy</mat-label>
-                            <input matInput placeholder="Accuracy" value="{{accuracy}}" readonly>
+                            <input matInput placeholder="Accuracy" value="{{accuracy}}" formControlName="accuracy" readonly>
                           </mat-form-field>
               </mat-card-content>
             </mat-card>
