@@ -3,20 +3,20 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title text-center>
         <div id="logo">PANTAU LINGKUNGAN</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding color="medium">
-    <form [formGroup]="laporanForm"  (ngSubmit)="onFormSubmit(laporanForm.value)">
+    <form [formGroup]="laporanForm" (ngSubmit)="onFormSubmit()">
 
     <mat-card class="result">
         <mat-card-content>
        <mat-form-field class="full-width">
         <mat-label>Judul</mat-label>
-        <input matInput placeholder="Masukan Judul" formControlName="judul">
+        <input matInput placeholder="Masukan Judul" formControlName="judul" required>
             <mat-error *ngIf="f.judul.invalid">
               Judul harus diisi!
             </mat-error>
@@ -25,14 +25,14 @@
 
       <mat-form-field class="full-width">
       <mat-label>Kategori</mat-label>
-      <mat-select  formControlName="kategori">
+      <mat-select  formControlName="kategori" required>
         <mat-option value="1">Polusi Udara</mat-option>
         <mat-option value="2">Perhutanan Hilang</mat-option>
         <mat-option value="3">Polusi Air</mat-option>
         <mat-option value="4">Pertambangan</mat-option>
         <mat-option value="5">Satwa dan Tumbuhan liar</mat-option>
       </mat-select>
-          <mat-error *ngIf="f.kategori.invalid">Anda harus memilih sektor!</mat-error>
+          <mat-error *ngIf="f.kategori.invalid">Anda harus memilih kategori!</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Deskripsi Laporan</mat-label>
@@ -42,7 +42,7 @@
         cdkAutosizeMaxRows="5"
         #autosize="cdkTextareaAutosize"
         placeholder="Deskripsi Laporan"
-        formControlName="deskripsiLaporan">
+        formControlName="deskripsiLaporan" required>
       </textarea>
           <mat-error *ngIf="f.deskripsiLaporan.invalid">Anda harus mengisi deskripsi Laporan</mat-error>
       </mat-form-field>

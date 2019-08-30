@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { MenuController, Platform, LoadingController, AlertController } from '@ionic/angular';
+import { MenuController, Platform, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -21,6 +21,7 @@ export class HomePage {
   altitude
 
   constructor(
+    public toastController: ToastController,
     public alertController: AlertController, public loadingController: LoadingController, public platform : Platform,
     public camera: Camera, 
     private androidPermissions: AndroidPermissions,
@@ -42,6 +43,14 @@ export class HomePage {
 
   ngOnInit() {
     this.menuCtrl.enable(true);
+  }
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
   pantauSampah(){
     this.router.navigate(['/pantau-sampah']);
@@ -82,7 +91,7 @@ export class HomePage {
               error => {
                 //Show alert if user click on 'No Thanks'
                 /* alert('requestPermission Error requesting location permissions ' + error) */
-                alert('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
+              this.presentToast('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
               }
             );
         }
@@ -98,7 +107,7 @@ export class HomePage {
         },
         error => 
         /* alert('Error requesting location permissions ' + JSON.stringify(error)) */
-        alert('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
+        this.presentToast('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
       );
     }
     async getLocationCoordinates(){
@@ -125,7 +134,7 @@ export class HomePage {
         loading.dismiss();
        }).catch((error) => {
         loading.dismiss();
-         alert('Error getting location' + error);
+        this.presentToast('Error getting location' + error);
          console.log('Error getting location', error);
        });
   
@@ -163,7 +172,7 @@ export class HomePage {
      this.capturedSnapURL =(<any>window).Ionic.WebView.convertFileSrc(imageData);
     }, (err) => {
      // Handle error
-     alert("error "+JSON.stringify(err))
+     this.presentToast("error "+JSON.stringify(err))
     });
 
   }
@@ -174,8 +183,8 @@ export class HomePage {
     this.submitted = true;
 
     if (this.laporanForm.invalid) {
-      return;
-   }
-    }
+      this.presentToast('Anda belum melengkapi formulir')
+     }
+  }
 
 }
