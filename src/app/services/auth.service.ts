@@ -42,4 +42,18 @@ export class AuthService {
     
       );
   }
+
+  PostData(data, type, access_token): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept' : 'application/json',
+        'Authorization': 'Bearer ' + access_token
+      })
+    };
+    return this.http.post<any>(apiUrl+type, data, httpOptions)
+      .pipe(
+    
+      );
+  }
 }

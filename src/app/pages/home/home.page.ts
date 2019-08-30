@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,6 +23,7 @@ export class HomePage {
   altitude
 
   constructor(
+    public authService: AuthService,
     public toastController: ToastController,
     public alertController: AlertController, public loadingController: LoadingController, public platform : Platform,
     public camera: Camera, 
@@ -185,6 +188,10 @@ export class HomePage {
     if (this.laporanForm.invalid) {
       this.presentToast('Anda belum melengkapi formulir')
      }
+
+     
+
+
   }
 
 }
