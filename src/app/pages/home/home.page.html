@@ -24,15 +24,15 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-      <mat-label>Sektor</mat-label>
-      <mat-select  formControlName="sektor">
+      <mat-label>Kategori</mat-label>
+      <mat-select  formControlName="kategori">
         <mat-option value="1">Polusi Udara</mat-option>
         <mat-option value="2">Perhutanan Hilang</mat-option>
         <mat-option value="3">Polusi Air</mat-option>
         <mat-option value="4">Pertambangan</mat-option>
         <mat-option value="5">Satwa dan Tumbuhan liar</mat-option>
       </mat-select>
-          <mat-error *ngIf="f.sektor.invalid">Anda harus memilih sektor!</mat-error>
+          <mat-error *ngIf="f.kategori.invalid">Anda harus memilih sektor!</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Deskripsi Laporan</mat-label>

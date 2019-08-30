@@ -29,7 +29,7 @@ export class HomePage {
     private formBuilder: FormBuilder, public router : Router, public menuCtrl: MenuController, ) {
     this.laporanForm = this.formBuilder.group({
       'judul' : ['', Validators.required],
-      'sektor' : ['', Validators.required],
+      'kategori' : ['', Validators.required],
       'namaPerusahaan' : [''],
       'desaKelurahan' : [''],
       'kecamatan' : [''],
