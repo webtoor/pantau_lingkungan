@@ -1,15 +1,15 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title style="margin-left: auto;">
-      PANTAU LINGKUNGAN
+    <ion-title>
+        <div id="logo">PANTAU LINGKUNGAN</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding color="medium">
     <form [formGroup]="laporanForm"  (ngSubmit)="onFormSubmit(laporanForm.value)">
 
     <mat-card class="result">
@@ -35,6 +35,18 @@
           <mat-error *ngIf="f.sektor.invalid">Anda harus memilih sektor!</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
+        <mat-label>Deskripsi Laporan</mat-label>
+        <textarea matInput 
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="5"
+        #autosize="cdkTextareaAutosize"
+        placeholder="Deskripsi Laporan"
+        formControlName="deskripsiLaporan">
+      </textarea>
+          <mat-error *ngIf="f.deskripsiLaporan.invalid">Anda harus mengisi deskripsi Laporan</mat-error>
+      </mat-form-field>
+    <mat-form-field class="full-width">
         <mat-label>Nama Perusahaan</mat-label>
         <input matInput placeholder="Nama Perusahaan" formControlName="namaPerusahaan">
       </mat-form-field>
@@ -54,18 +66,7 @@
                 <mat-label>Provinsi</mat-label>
                 <input matInput placeholder="Provinsi" formControlName="provinsi">
               </mat-form-field>
-      <mat-form-field class="full-width">
-          <mat-label>Deskripsi Laporan</mat-label>
-          <textarea matInput 
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="5"
-          #autosize="cdkTextareaAutosize"
-          placeholder="Deskripsi Laporan"
-          formControlName="deskripsiLaporan">
-        </textarea>
-            <mat-error *ngIf="f.deskripsiLaporan.invalid">Anda harus mengisi deskripsi Laporan</mat-error>
-        </mat-form-field>
+   
       </mat-card-content>
     </mat-card>
     <br>    
@@ -109,11 +110,9 @@
               </mat-card-content>
             </mat-card>
             <br>
-            <div text-center>
-                <button type="submit" mat-raised-button	color="primary" style="width: 80%;">Go to next step</button>
-
-            </div>
+            <ion-button expand="block" color="success" type="submit">SUBMIT</ion-button>
           </form>
+        </ion-content>
 
 
  <!--    <ion-grid>
@@ -225,4 +224,3 @@
         <ion-label>Theme Your App</ion-label>
       </ion-item>
     </ion-list> -->
-</ion-content>
