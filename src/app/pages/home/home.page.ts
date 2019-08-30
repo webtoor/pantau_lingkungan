@@ -49,6 +49,7 @@ export class HomePage {
 
   ngOnInit() {
     this.menuCtrl.enable(true);
+    this.laporanForm.reset();
   }
   ionViewWillEnter() {
    console.log('rate')
