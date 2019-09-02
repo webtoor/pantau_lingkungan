@@ -106,7 +106,7 @@ export class HomePage {
               error => {
                 //Show alert if user click on 'No Thanks'
                 /* alert('requestPermission Error requesting location permissions ' + error) */
-              this.presentToast('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
+              this.presentToast('Untuk mendapatkan akurasi yang maksimal, Anda perlu mengaktifkan GPS')
               }
             );
         }
@@ -122,7 +122,7 @@ export class HomePage {
         },
         error => 
         /* alert('Error requesting location permissions ' + JSON.stringify(error)) */
-        this.presentToast('Untuk mendapatkan akurasi yang tinggi, Anda perlu mengaktifkan GPS')
+        this.presentToast('Untuk mendapatkan akurasi yang maksimal, Anda perlu mengaktifkan GPS')
       );
     }
     async getLocationCoordinates(){
@@ -139,10 +139,13 @@ export class HomePage {
         this.longitude = resp.coords.longitude;
         this.accuracy = resp.coords.accuracy;
         var altitudes = resp.coords.altitude;
-        this.laporanForm.value['latitude'] = resp.coords.latitude;
-        this.laporanForm.value['longitude'] = resp.coords.longitude;
-        this.laporanForm.value['altitude'] = resp.coords.altitude;
-        this.laporanForm.value['accuracy'] = resp.coords.accuracy;
+        this.laporanForm.patchValue({
+          latitude : resp.coords.latitude,
+          longitude : resp.coords.latitude,
+          altitude : resp.coords.altitude,
+          accuracy : resp.coords.accuracy
+        });
+
         if(!altitudes){
           this.altitude = 'Data tidak tersedia';
         }else{
@@ -203,13 +206,18 @@ export class HomePage {
 
   async onFormSubmit() {
     this.submitted = true;
+  
     this.laporanForm.value['user_id'] = this.userAuth['id']
+    console.log(this.laporanForm.value)
 
     if (this.laporanForm.invalid) {
       this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
-     console.log(this.laporanForm.value)
+     if(!this.laporanForm.value['img']){
+       this.presentToast('Anda belum mengambil foto!')
+       return
+     }
      const alert = await this.alertController.create({
       header: 'Konfirmasi',
       message: 'Anda yakin dengan isi data diatas?',
@@ -232,8 +240,11 @@ export class HomePage {
                 this.router.navigate(['/login', {replaceUrl: true}]);
               }else if(res.status == '1'){
                 this.router.navigate(['/loader', {replaceUrl: true}]);
+              }else{
+                this.presentToast('Maaf. Terjadi kesalahan, Coba beberapa saat lagi :(')
               }
             }, (err) => {
+              this.presentToast('Maaf. Terjadi kesalahan, Coba beberapa saat lagi :(')
               console.log(err);
             });
           }
