@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { MenuController, Platform, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { MenuController, Platform, LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -28,6 +28,7 @@ export class HomePage {
     public toastController: ToastController,
     public alertController: AlertController, public loadingController: LoadingController, public platform : Platform,
     public camera: Camera, 
+    private navCtrl: NavController,
     private androidPermissions: AndroidPermissions,
     private geolocation: Geolocation,
     private locationAccuracy: LocationAccuracy,
@@ -35,6 +36,7 @@ export class HomePage {
     this.laporanForm = this.formBuilder.group({
       'judul' : [null, Validators.required],
       'kategori' : [null, Validators.required],
+      'deskripsiLaporan' : [null, Validators.required],
       'namaPerusahaan' : [null],
       'desaKelurahan' : [null],
       'kecamatan' : [null],
@@ -42,9 +44,9 @@ export class HomePage {
       'provinsi' : [null],
       'latitude' : [null, Validators.required],
       'longitude' : [null, Validators.required],
-      'altitude' : [null, Validators.required],
+      'altitude' : [null],
       'accuracy' : [null, Validators.required],
-      'deskripsiLaporan' : [null, Validators.required],
+      'img' : [null],
     });
     const data = JSON.parse(localStorage.getItem('userAuth'));
     this.userAuth = data;
@@ -53,11 +55,9 @@ export class HomePage {
 
   ngOnInit() {
     this.menuCtrl.enable(true);
-    this.laporanForm.reset();
   }
   ionViewWillEnter() {
-   console.log('rate')
-
+    this.laporanForm.reset();
   }
   async presentToast(msg) {
     const toast = await this.toastController.create({
@@ -182,7 +182,7 @@ export class HomePage {
   }
   takeSnap(){
     const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -192,7 +192,9 @@ export class HomePage {
      // imageData is either a base64 encoded string or a file URI
       let base64Image = "data:image/jpeg;base64," + imageData;
       this.image = base64Image;
-      this.laporanForm.value['img'] = this.image;
+      this.laporanForm.patchValue({
+        img : this.image,
+      });      
       this.capturedSnapURL = base64Image;
       /* this.capturedSnapURL =(<any>window).Ionic.WebView.convertFileSrc(imageData); */
     }, (err) => {
@@ -210,14 +212,14 @@ export class HomePage {
     this.laporanForm.value['user_id'] = this.userAuth['id']
     console.log(this.laporanForm.value)
 
-    if (this.laporanForm.invalid) {
+   /*  if (this.laporanForm.invalid) {
       this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
-     if(!this.laporanForm.value['img']){
+     if(this.laporanForm.value['img'] == null){
        this.presentToast('Anda belum mengambil foto!')
        return
-     }
+     } */
      const alert = await this.alertController.create({
       header: 'Konfirmasi',
       message: 'Anda yakin dengan isi data diatas?',
@@ -232,6 +234,7 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
+
             this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
               console.log(res)
               if(res.status == 401){
@@ -239,7 +242,8 @@ export class HomePage {
                 this.presentToast('Akses Token Invalid')
                 this.router.navigate(['/login', {replaceUrl: true}]);
               }else if(res.status == '1'){
-                this.router.navigate(['/loader', {replaceUrl: true}]);
+                console.log(res.message);
+                this.navCtrl.navigateRoot('/loader');
               }else{
                 this.presentToast('Maaf. Terjadi kesalahan, Coba beberapa saat lagi :(')
               }
