@@ -22,7 +22,7 @@ export class HomePage {
   accuracy
   altitude
   userAuth
-
+  image
   constructor(
     public authService: AuthService,
     public toastController: ToastController,
@@ -180,15 +180,18 @@ export class HomePage {
   takeSnap(){
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     this.capturedSnapURL =(<any>window).Ionic.WebView.convertFileSrc(imageData);
+      let base64Image = "data:image/jpeg;base64," + imageData;
+      this.image = base64Image;
+      this.laporanForm.value['img'] = this.image;
+      this.capturedSnapURL = base64Image;
+      /* this.capturedSnapURL =(<any>window).Ionic.WebView.convertFileSrc(imageData); */
     }, (err) => {
      // Handle error
      this.presentToast("error "+JSON.stringify(err))
@@ -227,8 +230,7 @@ export class HomePage {
                 localStorage.clear();
                 this.presentToast('Akses Token Invalid')
                 this.router.navigate(['/login', {replaceUrl: true}]);
-      
-              }else{
+              }else if(res.status == '1'){
                 this.router.navigate(['/loader', {replaceUrl: true}]);
               }
             }, (err) => {
