@@ -162,24 +162,6 @@ export class HomePage {
   
   }
    
-  async submit() {
-    const alert = await this.alertController.create({
-      header: 'Terima kasih',
-      message: 'Telah melaporkan hal ini',
-      buttons: [
-       {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.router.navigate(['/loader', {replaceUrl: true}]);
-
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
   takeSnap(){
     const options: CameraOptions = {
       quality: 60,
@@ -212,14 +194,14 @@ export class HomePage {
     this.laporanForm.value['user_id'] = this.userAuth['id']
     console.log(this.laporanForm.value)
 
-    if (this.laporanForm.invalid) {
+  /*   if (this.laporanForm.invalid) {
       this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
      if(this.laporanForm.value['img'] == null){
        this.presentToast('Anda belum mengambil foto!')
        return
-     }
+     } */
      const alert = await this.alertController.create({
       header: 'Konfirmasi',
       message: 'Anda yakin dengan isi data diatas?',
@@ -273,15 +255,15 @@ export class HomePage {
         console.log('Loading dismissed!');
       });
     });
-    this.hideLoader();
+  /*   this.hideLoader(); */
   }
 
   hideLoader() {
     this.loadingController.dismiss();
 
-    /* setTimeout(() => {
+    setTimeout(() => {
       this.loadingController.dismiss();
-    }, 2000);   */
+    }, 1500);  
   }
 
 }

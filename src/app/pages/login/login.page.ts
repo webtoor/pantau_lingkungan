@@ -89,14 +89,14 @@ export class LoginPage implements OnInit {
         console.log('Loading dismissed!');
       });
     });
-    this.hideLoader();
+    /* this.hideLoader(); */
   }
 
   hideLoader() {
     this.loadingController.dismiss();
 
-    /* setTimeout(() => {
+    setTimeout(() => {
       this.loadingController.dismiss();
-    }, 2000);   */
+    }, 1500);  
   }
 }
