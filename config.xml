@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.testmantau.tls" version="1.1.789" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Walhi</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="fmunshi@eidaramata.com" href="https://fityanali.site/">Webtoor</author>
+    <name>Pantau Lingkungan</name>
+    <description>Pantau Lingkungan</description>
+    <author email="fityanalishi@gmail.com" href="https://fityanali.site/">Webtoor</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

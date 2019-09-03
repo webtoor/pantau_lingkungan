@@ -152,7 +152,6 @@ export class HomePage {
           this.altitude = altitudes;
   
         }
-        /* this.accuracy = resp.coords.accuracy;   */ 
         loading.dismiss();
        }).catch((error) => {
         loading.dismiss();
@@ -212,14 +211,14 @@ export class HomePage {
     this.laporanForm.value['user_id'] = this.userAuth['id']
     console.log(this.laporanForm.value)
 
-   /*  if (this.laporanForm.invalid) {
+    if (this.laporanForm.invalid) {
       this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
      if(this.laporanForm.value['img'] == null){
        this.presentToast('Anda belum mengambil foto!')
        return
-     } */
+     }
      const alert = await this.alertController.create({
       header: 'Konfirmasi',
       message: 'Anda yakin dengan isi data diatas?',
@@ -234,7 +233,7 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-
+          
             this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
               console.log(res)
               if(res.status == 401){
