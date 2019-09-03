@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, ToastController } from '@ionic/angular';
+import { MenuController, ToastController, LoadingController, } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -12,10 +12,11 @@ import { AuthService } from '../../services/auth.service';
 export class LoginPage implements OnInit {
   loginForm : FormGroup;
   submitted = false;
-
+  loaderToShow: any;
   constructor(private formBuilder: FormBuilder,  
     public authService: AuthService,
     public router : Router, 
+    public loadingController: LoadingController,
     public menuCtrl: MenuController,
     public toastController: ToastController) { 
     this.loginForm = this.formBuilder.group({
@@ -43,16 +44,20 @@ export class LoginPage implements OnInit {
         return;
     }
     console.log(this.loginForm.value)
+    this.showLoader()
       this.authService.Login( this.loginForm.value, 'login')
       .subscribe(res => {
         console.log(res)
         if(res.access_token) {
+          this.hideLoader();
           localStorage.setItem('userAuth', JSON.stringify(res));
           this.router.navigate(['/home', {replaceUrl: true}]);
         }else{
+          this.hideLoader();
           this.presentToast();
         }
       }, (err) => {
+        this.hideLoader();
         console.log(err);
       });
 
@@ -72,5 +77,26 @@ export class LoginPage implements OnInit {
 
   register(){
     this.router.navigate(['/register']);
+  }
+
+  async showLoader() {
+    this.loaderToShow = await this.loadingController.create({
+      message: 'Processing Server Request'
+    }).then((res) => {
+      res.present();
+
+      res.onDidDismiss().then((dis) => {
+        console.log('Loading dismissed!');
+      });
+    });
+    this.hideLoader();
+  }
+
+  hideLoader() {
+    this.loadingController.dismiss();
+
+    /* setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 2000);   */
   }
 }

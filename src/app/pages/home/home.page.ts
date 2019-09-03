@@ -23,6 +23,7 @@ export class HomePage {
   altitude
   userAuth
   image
+  loaderToShow: any;
   constructor(
     public authService: AuthService,
     public toastController: ToastController,
@@ -233,20 +234,24 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
-          
+            this.showLoader()
             this.authService.PostData(this.laporanForm.value, 'api/v1/user/lapor', this.userAuth['access_token']).subscribe(res => {
               console.log(res)
               if(res.status == 401){
+                this.hideLoader();
                 localStorage.clear();
                 this.presentToast('Akses Token Invalid')
                 this.router.navigate(['/login', {replaceUrl: true}]);
               }else if(res.status == '1'){
+                this.hideLoader();
                 console.log(res.message);
                 this.navCtrl.navigateRoot('/loader');
               }else{
+                this.hideLoader();
                 this.presentToast('Maaf. Terjadi kesalahan, Coba beberapa saat lagi :(')
               }
             }, (err) => {
+              this.hideLoader();
               this.presentToast('Maaf. Terjadi kesalahan, Coba beberapa saat lagi :(')
               console.log(err);
             });
@@ -256,6 +261,27 @@ export class HomePage {
     });
     await alert.present();
     
+  }
+
+  async showLoader() {
+    this.loaderToShow = await this.loadingController.create({
+      message: 'Processing Server Request'
+    }).then((res) => {
+      res.present();
+
+      res.onDidDismiss().then((dis) => {
+        console.log('Loading dismissed!');
+      });
+    });
+    this.hideLoader();
+  }
+
+  hideLoader() {
+    this.loadingController.dismiss();
+
+    /* setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 2000);   */
   }
 
 }
