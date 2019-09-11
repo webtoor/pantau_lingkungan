@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
     if(localStorage.getItem('userAuth') ){
-      this.router.navigate(['/home', {replaceUrl: true}]);
+      this.router.navigate(['/home'], {replaceUrl: true});
     }
   }
 
@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
         if(res.access_token) {
           this.hideLoader();
           localStorage.setItem('userAuth', JSON.stringify(res));
-          this.router.navigate(['/home', {replaceUrl: true}]);
+          this.router.navigate(['/home'], {replaceUrl: true});
         }else{
           this.hideLoader();
           this.presentToast();

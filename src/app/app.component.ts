@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -9,27 +9,25 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit, OnDestroy {
   public appPages = [
     {
       title: 'Home',
       url: '/home',
       icon: 'home'
-    },
-  /*   {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    } */
+    }
   ];
-
+  backButtonSubscription
+  counts :number = 0;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public toastController : ToastController
   ) {
     this.initializeApp();
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -38,5 +36,34 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#009624');
       this.statusBar.styleBlackTranslucent();
     });
+  }
+
+  ngAfterViewInit() {
+    this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+      this.counts++
+      if((window.location.pathname == '/login') || (window.location.pathname == '/register') || (window.location.pathname == '/home') || (window.location.pathname == '/loader')){
+        if(this.counts == 2){
+          navigator['app'].exitApp();
+          this.counts = 0;
+        }
+        this.presentToast('Tekan sekali lagi untuk keluar')
+      }else{
+        this.counts = 0
+        window.history.back();
+      }
+    }); 
+  }
+
+  ngOnDestroy() {
+    this.backButtonSubscription.unsubscribe();
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }

@@ -194,14 +194,14 @@ export class HomePage {
     this.laporanForm.value['user_id'] = this.userAuth['id']
     console.log(this.laporanForm.value)
 
-  /*   if (this.laporanForm.invalid) {
+    if (this.laporanForm.invalid) {
       this.presentToast('Data yang anda masukan belum lengkap')
       return
      }
      if(this.laporanForm.value['img'] == null){
        this.presentToast('Anda belum mengambil foto!')
        return
-     } */
+     }
      const alert = await this.alertController.create({
       header: 'Konfirmasi',
       message: 'Anda yakin dengan isi data diatas?',
@@ -223,7 +223,7 @@ export class HomePage {
                 this.hideLoader();
                 localStorage.clear();
                 this.presentToast('Akses Token Invalid')
-                this.router.navigate(['/login', {replaceUrl: true}]);
+                this.router.navigate(['/login'], {replaceUrl: true});
               }else if(res.status == '1'){
                 this.hideLoader();
                 console.log(res.message);

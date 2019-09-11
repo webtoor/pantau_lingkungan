@@ -15,7 +15,7 @@ export class LoaderPage implements OnInit {
 
   toHome(){
     /* this.router.navigate(['/home', { skipLocationChange: false, replaceUrl: true }]); */
-    this.router.navigate(['/home', {replaceUrl: true }]);
+    this.router.navigate(['/home'], {replaceUrl: true });
   }
 
 }
