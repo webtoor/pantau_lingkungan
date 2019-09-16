@@ -48,6 +48,8 @@ export class HomePage {
       'altitude' : [null],
       'accuracy' : [null, Validators.required],
       'img' : [null],
+      'user_id' : [null],
+      'status_id' : [null]
     });
     const data = JSON.parse(localStorage.getItem('userAuth'));
     this.userAuth = data;
@@ -191,7 +193,11 @@ export class HomePage {
   async onFormSubmit() {
     this.submitted = true;
   
-    this.laporanForm.value['user_id'] = this.userAuth['id']
+    //this.laporanForm.value['user_id'] = this.userAuth['id']
+    this.laporanForm.patchValue({
+      user_id : this.userAuth['id'],
+      status_id : 1
+    });  
     console.log(this.laporanForm.value)
 
     if (this.laporanForm.invalid) {
