@@ -144,7 +144,7 @@ export class HomePage {
         var altitudes = resp.coords.altitude;
         this.laporanForm.patchValue({
           latitude : resp.coords.latitude,
-          longitude : resp.coords.latitude,
+          longitude : resp.coords.longitude,
           altitude : resp.coords.altitude,
           accuracy : resp.coords.accuracy
         });
@@ -265,11 +265,11 @@ export class HomePage {
   }
 
   hideLoader() {
-    this.loadingController.dismiss();
+    //this.loadingController.dismiss();
 
     setTimeout(() => {
       this.loadingController.dismiss();
-    }, 1500);  
+    }, 2000);  
   }
 
 }

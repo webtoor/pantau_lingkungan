@@ -15,6 +15,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       title: 'Home',
       url: '/home',
       icon: 'home'
+    },
+    {
+      title: 'Akun',
+      url: '/akun',
+      icon: 'contact'
     }
   ];
   backButtonSubscription
@@ -41,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       this.counts++
-      if((window.location.pathname == '/login') || (window.location.pathname == '/register') || (window.location.pathname == '/home') || (window.location.pathname == '/loader')){
+      if((window.location.pathname == '/login') || (window.location.pathname == '/register') || (window.location.pathname == '/home') || (window.location.pathname == '/loader') || (window.location.pathname == '/akun')){
         if(this.counts == 2){
           navigator['app'].exitApp();
           this.counts = 0;

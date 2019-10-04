@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit {
         console.log(res)
         if(res.status == 'berhasil') {
           this.presentToast('Berhasil membuat akun, silahkan login');
-          this.router.navigate(['/login', {replaceUrl: true}]);
+          this.router.navigate(['/login'], {replaceUrl: true});
         }else{
           this.message = res['message'];
           this.errors = res['error'];
