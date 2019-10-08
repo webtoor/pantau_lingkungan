@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 
-import { Platform, ToastController} from '@ionic/angular';
+import { Platform, ToastController, Events} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
+  emailShows
   public appPages = [
     {
       title: 'Formulir',
@@ -25,11 +26,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   backButtonSubscription
   counts :number = 0;
   constructor(
+    public events : Events,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public toastController : ToastController
   ) {
+    const dataUser = JSON.parse(localStorage.getItem('userAuth'));
+    if(dataUser){
+      this.emailShows = dataUser.email;
+      }
+    events.subscribe('email', (email) => {
+      this.emailShows = email;
+    });
     this.initializeApp();
   }
 

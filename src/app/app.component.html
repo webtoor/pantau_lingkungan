@@ -2,28 +2,31 @@
   <ion-split-pane>
     <ion-menu type="overlay">
       <ion-header no-border>
-        <ion-toolbar style="height: 150px;" color="success">
+        <ion-toolbar style="height: 180px;" color="success">
           <img src="/assets/home/images/logo2.jpeg" alt="" style="height:70px; border-radius: 50%; 
           margin-top: 20px;
           margin-left: 20px;
-          width: 25%;"/>     
+          width: 25%;"/>   
+           <ion-item style="margin-top:35px;" color="white" no-border lines="none">
+              <b>{{emailShows}}</b>
+        </ion-item>  
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none">
-              <ion-icon slot="start" [name]="p.icon" color="dark"></ion-icon>
+              <ion-icon slot="start" [name]="p.icon" color="success"></ion-icon>
               <ion-label>
                 {{p.title}} 
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-item lines="none">
-              <ion-icon slot="start" name="md-heart" color="dark"></ion-icon>
+              <ion-icon slot="start" name="md-heart" color="success"></ion-icon>
               <ion-label>
                 <div style="color:red">
-                   <a href="https://donasipublik.walhi.or.id" style="color:red; text-decoration:none;">Donasi</a>
+                   <a href="https://donasipublik.walhi.or.id" style="color:red; text-decoration:none;"><b>Donasi</b></a>
                 </div>
               </ion-label>
             </ion-item>
@@ -33,7 +36,8 @@
       </ion-content>
       <ion-footer no-border>
           <div text-center>
-              v0.0.9
+            <a href="https://fityanali.site" style="text-decoration: none; color:black" >Dev: https://fityanali.site</a>
+             <p>Version : Beta</p>
           </div>
         </ion-footer>
     </ion-menu>
