@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'loader', loadChildren: './pages/loader/loader.module#LoaderPageModule', canActivate : [AuthGuardService] },
-  { path: 'akun', loadChildren: './akun/akun.module#AkunPageModule', canActivate : [AuthGuardService] }
+  { path: 'akun', loadChildren: './pages/akun/akun.module#AkunPageModule', canActivate : [AuthGuardService] }
 ];
 
 @NgModule({

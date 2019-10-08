@@ -12,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent implements AfterViewInit, OnDestroy {
   public appPages = [
     {
-      title: 'Home',
+      title: 'Formulir',
       url: '/home',
       icon: 'home'
     },
