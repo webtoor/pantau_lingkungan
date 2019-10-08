@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, ToastController, LoadingController, } from '@ionic/angular';
+import { MenuController, ToastController,  Events, LoadingController, } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
   constructor(private formBuilder: FormBuilder,  
     public authService: AuthService,
     public router : Router, 
+    public events : Events,
     public loadingController: LoadingController,
     public menuCtrl: MenuController,
     public toastController: ToastController) { 
@@ -50,6 +51,7 @@ export class LoginPage implements OnInit {
         console.log(res)
         if(res.access_token) {
           this.hideLoader();
+          this.events.publish('email', res['email']);
           localStorage.setItem('userAuth', JSON.stringify(res));
           this.router.navigate(['/home'], {replaceUrl: true});
         }else{
@@ -95,8 +97,8 @@ export class LoginPage implements OnInit {
   hideLoader() {
     this.loadingController.dismiss();
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.loadingController.dismiss();
-    }, 1500);  
+    }, 1500);   */
   }
 }

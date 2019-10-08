@@ -60,4 +60,30 @@ export class AuthService {
     
       );
   }
+  getData(type, access_token){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept' : 'application/json',
+        'Access-Control-Allow-Origin' :  '*',
+        'Authorization': 'Bearer ' + access_token
+      })
+    };
+    return this.http.get(apiUrl+type, httpOptions)
+    .pipe(
+      map(res => {
+        if (res['success'] == false) {
+          throw new Error('Value expected!');
+        }
+        //console.log(res['data'])
+        return res;
+      }),
+      catchError(this.handleError)
+   );
+  }
+
+  private handleError(error: Response | any) {  
+    console.error(error.message || error);  
+    return Observable.throw(error.status);  
+  }  
 }

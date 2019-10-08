@@ -2,7 +2,7 @@
   <ion-split-pane>
     <ion-menu type="overlay">
       <ion-header no-border>
-        <ion-toolbar style="height: 150px;" color="medium">
+        <ion-toolbar style="height: 150px;" color="success">
           <img src="/assets/home/images/logo2.jpeg" alt="" style="height:70px; border-radius: 50%; 
           margin-top: 20px;
           margin-left: 20px;
@@ -19,8 +19,23 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-item lines="none">
+              <ion-icon slot="start" name="md-heart" color="dark"></ion-icon>
+              <ion-label>
+                <div style="color:red">
+                   <a href="https://donasipublik.walhi.or.id" style="color:red; text-decoration:none;">Donasi</a>
+                </div>
+              </ion-label>
+            </ion-item>
         </ion-list>
+
+     
       </ion-content>
+      <ion-footer no-border>
+          <div text-center>
+              v0.0.9
+          </div>
+        </ion-footer>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>

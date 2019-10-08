@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     {
       title: 'Formulir',
       url: '/home',
-      icon: 'home'
+      icon: 'clipboard'
     },
     {
       title: 'Akun',
