@@ -10,7 +10,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  emailShows
   public appPages = [
     {
       title: 'Formulir',
@@ -23,6 +22,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       icon: 'contact'
     }
   ];
+  emailShows
   backButtonSubscription
   counts :number = 0;
   constructor(
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       this.counts++
-      if((window.location.pathname == '/login') || (window.location.pathname == '/register') || (window.location.pathname == '/home') || (window.location.pathname == '/loader') || (window.location.pathname == '/akun')){
+      if((window.location.pathname == '/login') || (window.location.pathname == '/register') || (window.location.pathname == '/home') || (window.location.pathname == '/loader')){
         if(this.counts == 2){
           navigator['app'].exitApp();
           this.counts = 0;
